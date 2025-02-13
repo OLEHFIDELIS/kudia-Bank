@@ -1,0 +1,24 @@
+{
+  "name": "kudia-bank",
+  "version": "1.0.0",
+  "description": "Bank App",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Oleh",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^8.1.4",
+    "bcryptjs": "^2.4.3",
+    "chalk": "^5.4.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "moment": "^2.30.1",
+    "mysql2": "^3.12.0",
+    "sequelize": "^6.37.5",
+    "uuid": "^11.0.5"
+  }
+}
