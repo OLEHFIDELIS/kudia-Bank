@@ -2,6 +2,7 @@ import express, { Request, Response, Express, NextFunction } from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
 import cors from 'cors';
+import DbInitailize from "./src/database/init"
 
 //create an app
 const app = express();
@@ -36,6 +37,7 @@ const PORT = process.env.PORT || 5000;
 
 const Boostrap = async function () {
   try {
+    await DbInitailize();
     app.listen(PORT, () => {
       console.log('Connection has been established successfully.');
     });

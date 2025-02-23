@@ -2,9 +2,10 @@
   "name": "kudia-bank",
   "version": "1.0.0",
   "description": "Bank App",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node index.ts"
   },
   "author": "Oleh",
   "license": "ISC",
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.0"
+    "@types/express": "^5.0.0",
+    "ts-node": "^10.9.2"
   }
 }

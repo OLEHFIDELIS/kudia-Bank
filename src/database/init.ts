@@ -8,4 +8,4 @@ const DbInitailize = async () => {
     }
 }
 
-export default  DbInitailize();
+export default  DbInitailize;
