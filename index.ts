@@ -17,12 +17,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-app.use((err: TypeError, req: Request, res: Response, next: NextFunction) => {
-  try {
-    if (err) {
-      return res.status(500).json({ status: false, message: (err as TypeError).message });
-    }
-  } catch (e) {}
+app.use((err:any, req:Request, res:Response, next:NextFunction) => {
+  console.error(err.stack);
+  if (err.message === 'Not allowed by CORS') {
+    res.status(403).send('CORS Error: Access Denied');
+  } else {
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 
