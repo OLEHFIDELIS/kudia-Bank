@@ -16,4 +16,4 @@ export interface IUser {
 }
 
 export interface IUserCreationBody extends Optional< IUser, 'id' | 'createdAt' | 'updatedAt'> {}
-export interface IUserMordel extends Model<IUser, IUserCreationBody>, IUser{}
+export interface IUserModel extends Model<IUser, IUserCreationBody>, IUser{}
