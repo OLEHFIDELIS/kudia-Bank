@@ -1,3 +1,4 @@
+import { toDefaultValue } from "sequelize/types/utils";
 import Db from "../database/index";
 import { IUserModel } from "../interfaces/user-interface";
 import { DataType, DataTypes } from "sequelize";
@@ -37,9 +38,31 @@ const userModel = Db.define<IUserModel>(
             type: DataTypes.STRING,
             allowNull: true
         },
-        isEmailverified: {
+        isEmailVerified: {
             type: DataTypes.STRING,
             allowNull: true
         },
-    }
-)
+        accountStatus: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
+            allowNull: false
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
+            allowNull: false
+        },
+
+
+},{
+    timestamps: true,
+    tableName: "users",
+    createdAt: "createdAt",
+    updatedAt: "updatedAt"
+});
+
+export default userModel;
