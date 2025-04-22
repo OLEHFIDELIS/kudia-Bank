@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 import cors from 'cors';
 import DbInitailize from "./src/database/init"
+import UserRouter from './src/router/user-router';
+
 
 //create an app
 const app = express();
@@ -28,6 +30,8 @@ app.use((err:any, req:Request, res:Response, next:NextFunction) => {
 });
 
 
+
+app.use('/api/user', UserRouter);
 
 app.get('/', (req : Request, res : Response) => {
   res.send(`Welcome to ${process.env.APPNAME}`);
