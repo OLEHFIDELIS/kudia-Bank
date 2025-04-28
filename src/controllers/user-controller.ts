@@ -46,7 +46,9 @@ class UserController{
             user.password = "";
             return Utility.handleSuccess(res, "User registered successfuly", {user}, ResponseCode.SUCCSESS)
         } catch (error) {
-            res.send({ message: "Server Error" })
+            console.error(error);
+            return Utility.handleError(res, "Server Error", ResponseCode.SERVER_ERROR);
+            // res.send({ message: "Server Error" })
         }
     };
 
