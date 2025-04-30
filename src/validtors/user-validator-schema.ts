@@ -7,8 +7,14 @@ const registerSchema = yup.object({
     password: yup.string().min(6).trim().required()
 });
 
+const loginSchema = yup.object({
+    email: yup.string().email().lowercase().trim().required(),
+    password: yup.string().min(6).trim().required()
+});
+
 const ValidationSchema = {
-    registerSchema
+    registerSchema,
+    loginSchema
 };
 
 export default ValidationSchema;
