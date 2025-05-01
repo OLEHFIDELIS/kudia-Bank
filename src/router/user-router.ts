@@ -4,12 +4,14 @@ import UserService from "../services/user-service";
 import { validator } from "../middleware/index.middleware";
 import ValidationSchema from "../validtors/user-validator-schema";
 import UserDataSource from "../datasources/user-datasousrce";
-
+import TokenService from "../services/token-service";
+import TokenDataSource from "../datasources/token-datasource";
 
 const createUserRoute = () => {
     const router = express.Router();
+    const tokenService = new TokenService(new TokenDataSource());
     const userService = new UserService(new UserDataSource());
-    const userController = new UserController(userService);
+    const userController = new UserController(userService, tokenService);
     
     router.post("/register",validator(ValidationSchema.registerSchema), (req : Request , res : Response )=> {
         userController.register(req, res);

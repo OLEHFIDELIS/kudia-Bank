@@ -6,13 +6,18 @@ import { IUserCreationBody } from "../interfaces/user-interface";
 import UserService from "../services/user-service";
 import Utility from "../utils/index.utils";
 import { ResponseCode } from "../interfaces/enum/code-enum";
+import TokenService from "../services/token-service";
+import { IToken } from "../interfaces/token-interface";
 
 
 class UserController{
-    
-    private userService: UserService
-    constructor(_userService: UserService){
-        this.userService =  _userService;
+    private userService: UserService;
+    private tokenService: TokenService;
+
+
+    constructor(_userService: UserService, _tokenService : TokenService){
+        this.userService =  _userService; 
+        this.tokenService =  _tokenService;
     }
 
     //-- structure the data
@@ -88,7 +93,7 @@ class UserController{
             if(!user){
                 return Utility.handleError(res, "Account does not exist ", ResponseCode.NOT_FOUND);
             }
-            const token = await this.tokenService.createForgotPasswordToken(params.email);
+            const token = await this.tokenService.createForgotPasswordToken(params.email) as IToken;
             await EmailService.sendForgotPasswordEmail(params.email, token.code);
             return Utility.handleSuccess(res, "Password reset code have been sent to your mail", {}, ResponseCode.SUCCSESS)
             res.send({ message: "Forgot Password mail sent " })
