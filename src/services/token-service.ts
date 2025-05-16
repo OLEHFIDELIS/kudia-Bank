@@ -29,10 +29,10 @@ class TokenService{
             key : email,
             type : this.TokenTypes.FORGOT_PASSWORD,
             expires: moment().add(this.tokenExpires, "minutes").toDate(),
-            status : this.TokenStatus.NOTUSED;
-        }
-        const query = {where: {...record}, raw: true} as IFindTokenQuery;
-        return this.tokenDataSource.fetchOne(query)
+            status : this.TokenStatus.NOTUSED
+        } as ITokenCreationBody
+        let token = await this.createToken(tokenData);
+        return token;
     }
 
     async createToken(record: ITokenCreationBody){

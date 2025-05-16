@@ -8,6 +8,7 @@ import Utility from "../utils/index.utils";
 import { ResponseCode } from "../interfaces/enum/code-enum";
 import TokenService from "../services/token-service";
 import { IToken } from "../interfaces/token-interface";
+import EmailService from "../services/email-service";
 
 
 class UserController{
@@ -35,7 +36,7 @@ class UserController{
                 lastname: params.lastname,
                 email: params.email,
                 username: params.email.split("@")[0],
-                password: params.Password,
+                password: params.password,
                 role: UserRoles.CUSTOMER,
                 isEmailVerified: EmailStatus.NO_TVERIFIED,
                 accountStatus: AccountStatus.ACTIVE,
@@ -96,7 +97,7 @@ class UserController{
             const token = await this.tokenService.createForgotPasswordToken(params.email) as IToken;
             await EmailService.sendForgotPasswordEmail(params.email, token.code);
             return Utility.handleSuccess(res, "Password reset code have been sent to your mail", {}, ResponseCode.SUCCSESS)
-            res.send({ message: "Forgot Password mail sent " })
+            
         } catch (error) {
             return Utility.handleError(res, (error as TypeError).message, ResponseCode.SERVER_ERROR);
         }

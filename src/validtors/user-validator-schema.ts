@@ -12,9 +12,15 @@ const loginSchema = yup.object({
     password: yup.string().min(6).trim().required()
 });
 
+const forgotPasswordSchema = yup.object({
+    email: yup.string().email().lowercase().trim().required(),
+});
+
 const ValidationSchema = {
     registerSchema,
-    loginSchema
+    loginSchema,
+    forgotPasswordSchema 
+
 };
 
 export default ValidationSchema;

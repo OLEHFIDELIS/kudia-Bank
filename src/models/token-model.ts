@@ -53,4 +53,4 @@ const TokenModel = Db.define<ITokenModel>(
     updatedAt: "updatedAt"
 });
 
-export default userModel;
+export default TokenModel;
