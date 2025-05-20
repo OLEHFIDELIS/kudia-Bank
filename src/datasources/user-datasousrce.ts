@@ -10,6 +10,10 @@ class UserDataSource implements IUserDataSource  {
     async fetchOne(querry: IFindUserQuery): Promise<IUser | null> {
         return await UserModel.findOne(querry);
     }
+
+    async updateOne(searchBy: IFindUserQuery, data: Partial<IUser>): Promise<void> {
+        await UserModel.update(data, searchBy);
+    }
 }
 
 export default UserDataSource;
