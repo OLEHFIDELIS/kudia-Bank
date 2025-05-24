@@ -18,6 +18,10 @@ const logger = createLogger({
     ]
 });
 
+const isEmpty = (data: any) => {
+    return !data || data.length === 0 || typeof data == "undefined" || data == null || Object.keys(data).length == 0;
+}
+
 const handleError = (res: Response, message: string, statusCode: number = 400) => {
     logger.log({level: 'error', message})
     return res.status(statusCode).json({ status: false, message })
@@ -48,7 +52,8 @@ const Utility = {
     handleError,
     handleSuccess,
     asyncHandler,
-    generateCode
+    generateCode,
+    isEmpty
 };
 
 export default Utility;
