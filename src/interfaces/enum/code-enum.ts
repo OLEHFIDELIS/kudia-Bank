@@ -4,5 +4,8 @@ export const ResponseCode = {
     BAD_REQUEST: 400,
     SUCCSESS: 200,
     SERVER_ERROR: 500,
-    INVALID_DATA: 422
+    INVALID_DATA: 422,
+    UNAUTHORIZED: 401,   // 👈 add this
+    CONFLICT: 409        // 👈 add this
+
 }

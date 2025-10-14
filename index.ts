@@ -4,11 +4,14 @@ dotenv.config();
 import cors from 'cors';
 import DbInitailize from "./src/database/init"
 import UserRouter from './src/router/user-router';
+import AccountRouter from './src/router/account-router'
 
 
 //create an app
 const app = express();
 
+
+app.use(express.json({ limit: '1mb' }));
 
 app.use(
   cors({
@@ -32,6 +35,7 @@ app.use((err:any, req:Request, res:Response, next:NextFunction) => {
 
 
 app.use('/api/user', UserRouter);
+app.use('/api/account', AccountRouter)
 
 app.get('/', (req : Request, res : Response) => {
   res.send(`Welcome to ${process.env.APPNAME}`);

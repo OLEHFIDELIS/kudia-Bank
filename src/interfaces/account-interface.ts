@@ -5,7 +5,7 @@ export interface IAccount {
     userId: string;
     accountNumber: string;
     balance: number;
-    type: Date;  // SAVING_ACCOUNT, CURRENT_ACCOUNT, COPERATE (mostly the type of account determins the withdrawal amount, lower or high transaction fee)
+    type: string;  // SAVING_ACCOUNT, CURRENT_ACCOUNT, COPERATE (mostly the type of account determins the withdrawal amount, lower or high transaction fee)
     status: string; // ACTIVE, DOMANT, FROZEN, UNDER_REVIEW
     createdAt: Date;
     updatedAt: Date;

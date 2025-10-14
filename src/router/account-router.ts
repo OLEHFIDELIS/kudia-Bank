@@ -1,5 +1,5 @@
 import  express, {Request, Response} from "express";
-import { auth, validator } from "../middleware/index.middleware";
+import { Auth, validator } from "../middleware/index.middleware";
 import ValidationSchema from "../validtors/account-validator-schema";
 import AccountController from "../controllers/account-controller";
 import AccountService from "../services/account-service";
@@ -13,8 +13,8 @@ const accountController = new AccountController(accountService);
 
 const createAccountRoute = () => {
 
-    router.post("/create-account",validator(ValidationSchema.createAccountSchema),auth(), (req : Request , res : Response )=> {
-        accountController.createAccount(req, res);
+    router.post("/create-account",validator(ValidationSchema.createAccountSchema),Auth(), (req : Request , res : Response ) => {
+       return accountController.createAccount(req, res);
     });
 
     return router;

@@ -17,13 +17,13 @@ class AccountController{
     private accountService: AccountService;
 
 
-    constructor(_accountService: AccountService,){
+    constructor(_accountService: AccountService){
         this.accountService =  _accountService;
     }
 
 
     async createAccount(req: Request, res: Response){
-
+     
         try {
             const params = {...req.body};
             const newAccount = {
@@ -32,15 +32,16 @@ class AccountController{
             }
 
             let account = await this.accountService.createAccount(newAccount);
-            return Utility.handleSuccess(res, "Account creation successfully", {account}, ResponseCode.SUCCSESS);
+            return Utility.handleSuccess(res, "Account created successfully", {account}, ResponseCode.SUCCSESS);
         } catch (error) {
-            // console.error(error);
+            console.error(error);
             return Utility.handleError(res, (error as TypeError).message, ResponseCode.SERVER_ERROR);
             // res.send({ message: "Server Error" })
         }
     };
-
+   
 }
+
 
 
 export default AccountController;

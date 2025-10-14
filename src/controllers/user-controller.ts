@@ -58,7 +58,9 @@ class UserController{
     async login(req: Request, res: Response){
         try {
             const params = {...req.body};
-            let user = await this.userService.getuserByField({email: params.email});
+
+            let user = await this.userService.getuserByField({ email: params.email });
+
             if(!user){
                 return Utility.handleError(res, "Invalid Login detail", ResponseCode.NOT_FOUND);
             }

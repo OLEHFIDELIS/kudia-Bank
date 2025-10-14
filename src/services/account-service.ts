@@ -41,7 +41,6 @@ class AccountService{
         return this.accountDataSource.create(record)
     }
 
-
 }
 
 export default AccountService
