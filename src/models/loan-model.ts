@@ -1,10 +1,11 @@
 import Db from '../database';
-import { IAccountModel } from '../interfaces/account-interface';
+import { ILoanModel } from '../interfaces/loan-interface';
 import { DataTypes } from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
 
-const AccountModel = Db.define<IAccountModel>(
-  'AccountModel',
+
+const LoanModel = Db.define<ILoanModel>(
+  'LoanModel',
   {
     id: {
       type: DataTypes.UUID,
@@ -12,27 +13,28 @@ const AccountModel = Db.define<IAccountModel>(
       allowNull: false,
       primaryKey: true,
     },
-    userId:{
-      type:DataTypes.STRING,
-      allowNull:false
+    userId: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    accountNumber:{
-      type:DataTypes.STRING,
-      allowNull:false,
-      unique:true
+    accountId: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    balance:{
-      type:DataTypes.DECIMAL(30,2),
+    amount: {
+      type: DataTypes.DECIMAL(30,2),
       defaultValue:0.00,
-      allowNull:false
+      allowNull: false,
     },
-    type:{
-      type:DataTypes.STRING,
-      allowNull:false
+    interest: {
+      type: DataTypes.FLOAT,
+      defaultValue:0,
+      allowNull: false,
     },
-    status:{
-      type:DataTypes.STRING,
-      allowNull:false
+    status: {
+      type: DataTypes.STRING,
+      defaultValue:'PENDING',
+      allowNull: false,
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -47,11 +49,11 @@ const AccountModel = Db.define<IAccountModel>(
   },
   {
     timestamps: true,
-    tableName: 'accounts',
+    tableName: 'loans',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
   }
 );
 
 
-export default AccountModel;
+export default LoanModel;

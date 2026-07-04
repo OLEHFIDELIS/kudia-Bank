@@ -1,10 +1,13 @@
-import express, { Request, Response, Express, NextFunction } from 'express';
 import dotenv from 'dotenv';
-dotenv.config();
+dotenv.config();                          // ← must be FIRST, before everything else
+
+import express, { Request, Response, Express, NextFunction } from 'express';
 import cors from 'cors';
-import DbInitailize from "./src/database/init"
+import DbInitailize from "./src/database/init";
 import UserRouter from './src/router/user-router';
-import AccountRouter from './src/router/account-router'
+import AccountRouter from './src/router/account-router';
+import TransactionRouter from './src/router/transaction-router';
+import AdminRouter from "./src/router/admin-router";
 
 
 //create an app
@@ -35,13 +38,15 @@ app.use((err:any, req:Request, res:Response, next:NextFunction) => {
 
 
 app.use('/api/user', UserRouter);
-app.use('/api/account', AccountRouter)
+app.use('/api/account', AccountRouter);
+app.use('/api/transaction', TransactionRouter);
+app.use('/api/admin', AdminRouter);
 
 app.get('/', (req : Request, res : Response) => {
   res.send(`Welcome to ${process.env.APPNAME}`);
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 const Boostrap = async function () {
   try {

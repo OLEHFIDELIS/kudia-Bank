@@ -1,10 +1,10 @@
 import Db from '../database';
-import { IAccountModel } from '../interfaces/account-interface';
+import { ITokenModel } from '../interfaces/token-interface';
 import { DataTypes } from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
 
-const AccountModel = Db.define<IAccountModel>(
-  'AccountModel',
+const TokenModel = Db.define<ITokenModel>(
+  'TokenModel',
   {
     id: {
       type: DataTypes.UUID,
@@ -12,27 +12,27 @@ const AccountModel = Db.define<IAccountModel>(
       allowNull: false,
       primaryKey: true,
     },
-    userId:{
-      type:DataTypes.STRING,
-      allowNull:false
+    key: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
-    accountNumber:{
-      type:DataTypes.STRING,
-      allowNull:false,
+    code: {
+      type: DataTypes.STRING,
+      allowNull: false,
       unique:true
     },
-    balance:{
-      type:DataTypes.DECIMAL(30,2),
-      defaultValue:0.00,
-      allowNull:false
+    type: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    type:{
-      type:DataTypes.STRING,
-      allowNull:false
+    expires: {
+      type: DataTypes.DATE,
+      defaultValue:DataTypes.NOW,
+      allowNull: false,
     },
-    status:{
-      type:DataTypes.STRING,
-      allowNull:false
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -47,11 +47,11 @@ const AccountModel = Db.define<IAccountModel>(
   },
   {
     timestamps: true,
-    tableName: 'accounts',
+    tableName: 'tokens',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
   }
 );
 
 
-export default AccountModel;
+export default TokenModel;
