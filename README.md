@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 ## Open Payment API
 
-Open Payment API is a Node.js application that provides a comprehensive API for bank operations. It offers functionalities for both users and administrators, making it a versatile solution for financial management.
-=======
-## Payment API
-
- Payment API is a Node.js application that provides a comprehensive API for bank operations. It offers functionalities for both users and administrators, making it a versatile solution for financial management.
->>>>>>> 271c91fc1e1befabea3f7c5aa08b770991789a5f
+kudia bank API is a Node.js application that provides a comprehensive API for bank operations. It offers functionalities for both users and administrators, making it a versatile solution for financial management.
 
 ## Features
 
@@ -27,10 +21,7 @@ Open Payment API is a Node.js application that provides a comprehensive API for 
 1. Clone the repository:
    
     ```bash
-<<<<<<< HEAD
-    git clone 
-=======
->>>>>>> 271c91fc1e1befabea3f7c5aa08b770991789a5f
+    git clone https://github.com/OLEHFIDELIS/kudia-Bank.git
     ```
 3. Navigate to the project directory:
    
@@ -72,8 +63,4 @@ JWT_KEY='sdfssffsdffsf'
 MAIL_USER=' '
 MAIL_PASSWORD=' '
 PAYSTACK_SECRET_KEY=''
-<<<<<<< HEAD
 PAYSTACK_CALLBACK_URL=''
-=======
-PAYSTACK_CALLBACK_URL=''
->>>>>>> 271c91fc1e1befabea3f7c5aa08b770991789a5f

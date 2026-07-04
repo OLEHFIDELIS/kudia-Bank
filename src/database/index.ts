@@ -1,18 +1,22 @@
 import { Sequelize, Dialect } from "sequelize";
 
-const database = process.env.DB_NAME as string;
-const username = process.env.DB_USERNAME as string;
-const password = process.env.DB_PASSWORD as string;
-const dialect = (process.env.DB_DIALECT as Dialect) ?? "mysql" ;
-const host = process.env.DB_HOST as string;
-const port = parseInt(process.env.DB_PORT as string);
+let _sequelize: Sequelize;
 
+const getDb = (): Sequelize => {
+  if (!_sequelize) {
+    _sequelize = new Sequelize(
+      process.env.DB_NAME as string,
+      process.env.DB_USERNAME as string,
+      process.env.DB_PASSWORD as string,
+      {
+        host: process.env.DB_HOST,
+        dialect: (process.env.DB_DIALECT as Dialect) ?? "mysql",
+        port: parseInt(process.env.DB_PORT as string),
+        logging: false,
+      }
+    );
+  }
+  return _sequelize;
+};
 
-const sequalize = new Sequelize(database, username, password,{
-    host,
-    dialect,
-    port,
-    logging: false,
-} );
-
-export default sequalize;
+export default getDb();

@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { createLogger , format , info, transport, transports } from 'winston';
+import { createLogger, format, transports } from 'winston';
 import { BANKS } from '../interfaces/enum/payee-enum';
 
 const printRed = (text: string) => {
@@ -7,34 +7,35 @@ const printRed = (text: string) => {
 };
 
 const logger = createLogger({
-  transports :[
+  transports: [
     new transports.File({
-      filename:'./logs/index.log',
-      level:'error',
-      format:format.combine(format.timestamp({format:'YYYY-MM-DD HH:mm:ss'}),format.printf((info)=>`${info.timestamp} ${info.level} : ${info.message} `))
-    })
-  ]
-})
+      filename: './logs/index.log',
+      level: 'error',
+      format: format.combine(
+        format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+        format.printf((info) => `${info.timestamp} ${info.level} : ${info.message} `)
+      ),
+    }),
+  ],
+});
 
-const  escapeHtml = (html:string) => {
+const escapeHtml = (html: string) => {
   return html.replace(/[&<>"']/g, '');
-}
+};
 
-
-
-const isEmpty = (data: any) =>{
+const isEmpty = (data: any) => {
   return !data || data.length === 0 || typeof data == 'undefined' || data == null || Object.keys(data).length == 0;
 };
 
-
-
-const handleError = (res: Response, message: string, statusCode: number = 400) => {
-  logger.log({level : 'error' , message});
-  return res.status(statusCode).json({ status: false, message });
+// Returns void so controller/middleware methods can use `return handleError(...)` without
+// TypeScript inferring a non-void return type on the parent function.
+const handleError = (res: Response, message: string, statusCode: number = 400): void => {
+  logger.log({ level: 'error', message });
+  res.status(statusCode).json({ status: false, message });
 };
 
-const handleSuccess = (res: Response, message: string, data = {}, statusCode: number = 200) => {
-  return res.status(statusCode).json({ status: true, message, data: { ...data } });
+const handleSuccess = (res: Response, message: string, data = {}, statusCode: number = 200): void => {
+  res.status(statusCode).json({ status: true, message, data: { ...data } });
 };
 
 const generateCode = (num: number = 15) => {
@@ -45,31 +46,27 @@ const generateCode = (num: number = 15) => {
   return result.toUpperCase();
 };
 
-
 const parseToObject = (value: string): any => {
   let counter = 0;
   let data = JSON.parse(value);
-  while(counter <= 2){
-    if(typeof data == 'object'){
+  while (counter <= 2) {
+    if (typeof data == 'object') {
       break;
-    }else{
+    } else {
       data = JSON.parse(data);
       counter++;
     }
   }
   return data;
+};
 
-}
-
-
-const getBankName = (bankCode:string): string =>{
-  const filter = BANKS.filter(item => (item.code == bankCode));
-  if(filter.length > 0){
+const getBankName = (bankCode: string): string => {
+  const filter = BANKS.filter((item) => item.code == bankCode);
+  if (filter.length > 0) {
     return filter[0].name;
   }
   return '';
-}
-
+};
 
 const Utility = {
   printRed,
@@ -79,7 +76,7 @@ const Utility = {
   isEmpty,
   escapeHtml,
   parseToObject,
-  getBankName
+  getBankName,
 };
 
 export default Utility;

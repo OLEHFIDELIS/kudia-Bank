@@ -1,19 +1,24 @@
-import { IFindAccountQuery, IAccount, IAccountDataSource, IAccountCreationBody } from "../interfaces/account-interface";
-import AccountModel from "../models/account-model";
+import { FindOptions } from 'sequelize';
+import { IFindAccountQuery, IAccount, IAccountDataSource, IAccountCreationBody } from '../interfaces/account-interface';
+import AccountModel from '../models/account-model';
 
-class AccountDataSource implements IAccountDataSource  {
+class AccountDataSource implements IAccountDataSource {
 
-    async create(record: IAccountCreationBody): Promise<IAccount>{
-        return await AccountModel.create(record);
-    }
-    
-    async fetchOne(querry: IFindAccountQuery): Promise<IAccount | null> {
-        return await AccountModel.findOne(querry);
-    }
+  async create(record: IAccountCreationBody): Promise<IAccount> {
+    return await AccountModel.create(record);
+  }
 
-    async updateOne(searchBy: IFindAccountQuery, data: Partial<IAccount>): Promise<void> {
-        await AccountModel.update(data, searchBy);
-    }
+  async fetchOne(query: IFindAccountQuery): Promise<IAccount | null> {
+    return await AccountModel.findOne(query);
+  }
+
+  async fetchAll(query: FindOptions<IAccount>): Promise<IAccount[]> {
+    return await AccountModel.findAll(query);
+  }
+
+  async updateOne(searchBy: IFindAccountQuery, data: Partial<IAccount>): Promise<void> {
+    await AccountModel.update(data, searchBy);
+  }
 }
 
 export default AccountDataSource;

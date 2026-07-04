@@ -1,4 +1,4 @@
-import { Optional, Model } from 'sequelize';
+import { Optional, Model, FindOptions } from 'sequelize';
 
 export interface IUser {
   id: string;
@@ -18,9 +18,9 @@ export interface IFindUserQuery {
   where: {
     [key: string]: string;
   };
-  order?:any
+  order?: any;
   raw?: boolean;
-  returning: boolean;
+  returning?: boolean;
 }
 
 export interface IUserCreationBody extends Optional<IUser, 'id' | 'createdAt' | 'updatedAt'> {}
@@ -30,7 +30,6 @@ export interface IUserModel extends Model<IUser, IUserCreationBody>, IUser {}
 export interface IUserDataSource {
   fetchOne(query: IFindUserQuery): Promise<IUser | null>;
   create(record: IUserCreationBody): Promise<IUser>;
-  updateOne(searchBy:IFindUserQuery , data:Partial<IUser>):Promise<void>
-
+  fetchAll(query: FindOptions<IUser>): Promise<IUser[]>;
+  updateOne(searchBy: IFindUserQuery, data: Partial<IUser>): Promise<void>;
 }
-

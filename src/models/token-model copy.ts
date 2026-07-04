@@ -1,4 +1,4 @@
-import Db from '../database';
+import Db from '../database/index';
 import { ITokenModel } from '../interfaces/token-interface';
 import { DataTypes } from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
@@ -19,7 +19,7 @@ const TokenModel = Db.define<ITokenModel>(
     code: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique:true
+      unique: true,
     },
     type: {
       type: DataTypes.STRING,
@@ -27,7 +27,7 @@ const TokenModel = Db.define<ITokenModel>(
     },
     expires: {
       type: DataTypes.DATE,
-      defaultValue:DataTypes.NOW,
+      defaultValue: DataTypes.NOW,
       allowNull: false,
     },
     status: {
@@ -52,6 +52,5 @@ const TokenModel = Db.define<ITokenModel>(
     updatedAt: 'updatedAt',
   }
 );
-
 
 export default TokenModel;
